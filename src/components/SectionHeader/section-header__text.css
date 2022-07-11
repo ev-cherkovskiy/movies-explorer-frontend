@@ -1,0 +1,13 @@
+.section-header__text {
+    margin: 0 0 23px 0;
+    font-size: 22px;
+    line-height: 1.21;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 650px) {
+    .section-header__text {
+        font-size: 18px;
+    }
+}

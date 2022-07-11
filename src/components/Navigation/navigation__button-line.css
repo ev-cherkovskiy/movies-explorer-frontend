@@ -1,0 +1,14 @@
+.navigation__button-line {
+    width: 100%;
+    height: 2px;
+    background-color: #000000;
+    position: relative;
+    top: 4px;
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .navigation__button-line {
+        display: block;
+    }
+}

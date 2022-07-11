@@ -1,0 +1,30 @@
+.timeline {
+    padding: 110px 70px 141px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: repeat(2, 36px);
+    gap: 0;
+    grid-template-areas: 
+    "one-week four-weeks"
+    "backend frontend";
+    font-size: 14px;
+    line-height: 1.21;
+    font-weight: 400;
+    align-items: center;
+    justify-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .timeline {
+        padding: 110px 50px 141px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .timeline {
+        padding: 60px 18px 70px;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: repeat(2, 35px);
+        font-size: 11px;
+    }
+}

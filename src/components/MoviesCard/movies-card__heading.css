@@ -1,0 +1,12 @@
+.movies-card__heading {
+    padding: 14px;
+    display: grid;
+    grid-template-columns: auto min-content;
+    grid-template-rows: auto auto;
+    column-gap: 9px;
+    row-gap: 9px;
+    grid-template-areas:
+        "title mark"
+        "duration mark";
+    align-items: center;
+}

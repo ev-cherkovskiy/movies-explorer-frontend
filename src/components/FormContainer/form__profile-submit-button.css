@@ -1,0 +1,18 @@
+.form__profile-submit-button {
+    align-self: center;
+    margin: 0 0 16px;
+    height: 16px;
+    width: min-content;
+    font-size: 13px;
+    line-height: 1.21;
+    font-weight: 400;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: opacity ease .3s;
+}
+
+.form__profile-submit-button:hover {
+    opacity: .6;
+}

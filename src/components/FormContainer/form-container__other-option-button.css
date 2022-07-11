@@ -1,0 +1,12 @@
+.form-container__other-option-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity ease .3s;
+}
+
+.form-container__other-option-button:hover {
+    opacity: .6;
+}
+

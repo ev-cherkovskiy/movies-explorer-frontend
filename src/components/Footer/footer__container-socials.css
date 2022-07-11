@@ -1,0 +1,16 @@
+.footer__container-socials {
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 20px;
+    list-style-type: none;
+    margin: 0;
+}
+
+@media screen and (max-width: 650px) {
+    .footer__container-socials {
+        flex-flow: column nowrap;
+        padding: 0;
+        text-align: center;
+        row-gap: 12px;
+    }
+}

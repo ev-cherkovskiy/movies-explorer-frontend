@@ -1,0 +1,17 @@
+.search-form-container {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 0 70px 48px;
+}
+
+@media screen and (max-width: 950px) {
+    .search-form-container {
+        padding: 0 30px 48px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .search-form-container {
+        padding: 0 15px 48px;
+    }
+}

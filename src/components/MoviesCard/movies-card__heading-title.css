@@ -1,0 +1,7 @@
+.movies-card__heading-title {
+    margin: 0;
+    grid-area: title;
+    font-size: 15px;
+    line-height: 1.21;
+    font-weight: 500;
+}

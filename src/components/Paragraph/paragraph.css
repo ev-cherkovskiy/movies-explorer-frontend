@@ -1,0 +1,14 @@
+.paragraph {
+    max-width: 600px;
+}
+
+.paragraph:nth-child(1) {
+    margin-right: 40px;
+}
+
+@media screen and (max-width: 650px) {
+    .paragraph:nth-child(1) {
+        margin-right: 0;
+        margin-bottom: 56px;
+    }
+}

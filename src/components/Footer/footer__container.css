@@ -1,0 +1,19 @@
+.footer__container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 13px;
+    line-height: 1.21;
+    font-weight: 400;
+    margin: 0 0 20px 0;
+}
+
+@media screen and (max-width: 650px) {
+    .footer__container {
+        font-size: 12px;
+        flex-flow: column-reverse nowrap;
+        margin: 0 0 10px 0;
+    }
+}

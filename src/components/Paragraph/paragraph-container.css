@@ -1,0 +1,19 @@
+.paragraph-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 0 70px;
+}
+
+@media screen and (max-width: 800px) {
+    .paragraph-container {
+        padding: 0 50px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .paragraph-container {
+        padding: 0 18px;
+        flex-flow: column nowrap;
+    }
+}

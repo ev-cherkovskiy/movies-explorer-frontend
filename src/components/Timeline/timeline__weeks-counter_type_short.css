@@ -1,0 +1,5 @@
+.timeline__weeks-counter_type_short {
+    grid-area: one-week;
+    color: #ffffff;
+    background-color: #000000;
+}

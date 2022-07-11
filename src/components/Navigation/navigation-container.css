@@ -1,0 +1,19 @@
+.navigation-container {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 16px;
+    align-items: center;
+    margin-left: -16px;
+}
+
+@media screen and (max-width: 800px) {
+    .navigation-container {
+        margin-left: 0;
+        flex-flow: column nowrap;
+        margin-top: 159px;
+        row-gap: 28px;
+    }
+}

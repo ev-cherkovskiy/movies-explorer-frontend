@@ -1,0 +1,17 @@
+.section-header {
+    padding: 110px 70px 70px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+@media screen and (max-width: 800px) {
+    .section-header {
+        padding: 110px 50px 70px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .section-header {
+        padding: 70px 18px 60px;
+    }
+}

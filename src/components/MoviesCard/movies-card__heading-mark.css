@@ -1,0 +1,18 @@
+.movies-card__heading-mark {
+    grid-area: mark;
+    width: 30px;
+    height: 30px;
+    background-image: url(../../images/mark_unsaved.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #f9f9f9;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity ease .3s;
+}
+
+.movies-card__heading-mark:hover {
+    opacity: .6;
+}

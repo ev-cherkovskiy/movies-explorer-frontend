@@ -1,0 +1,20 @@
+.app {
+  /* Шрифт на странице + сглаживание */
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Основной цвет текста */
+  color: #000000;
+  /* Основной цвет фона */
+  background-color: #ffffff;
+  /* Минимальная и максимальная ширина приложения */
+  min-width: 320px;
+  max-width: 1300px;
+  /* Настройка расположения дочерних блоков */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-items: center;
+  margin: 0 auto;
+
+  /* width: 100vw; */
+}

@@ -1,0 +1,19 @@
+.search-form {
+    margin: 70px 0 15px;
+    display: grid;
+    grid-template-columns: 34px auto 34px;
+    column-gap: 15px;
+    justify-content: space-between;
+}
+
+.search-form:focus-within {
+    outline: 2px solid #f3c1f8;
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+@media screen and (max-width: 650px) {
+    .search-form {
+        grid-template-columns: auto 34px;
+    }
+}

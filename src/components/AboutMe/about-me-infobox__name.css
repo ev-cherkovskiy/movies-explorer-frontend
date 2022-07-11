@@ -1,0 +1,15 @@
+.about-me-infobox__name {
+    font-size: 50px;
+    line-height: 1.16;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    margin: 0 0 18px 0;
+    grid-area: name;
+}
+
+@media screen and (max-width: 650px) {
+    .about-me-infobox__name {
+        margin: 40px 0 20px 0;
+        font-size: 30px;
+    }
+}

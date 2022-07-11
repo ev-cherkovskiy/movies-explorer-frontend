@@ -1,0 +1,16 @@
+.about-me-infobox__socials {
+    grid-area: socials;
+    align-self: flex-end;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 20px;
+}
+
+@media screen and (max-width: 650px) {
+    .about-me-infobox__socials {
+        margin: 40px 0 0;
+    }
+}

@@ -1,0 +1,24 @@
+.form-container {
+    max-width: 396px;
+    width: calc(100% - 2*70px);
+    min-height: 560px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content auto min-content;
+    padding: 18px 0;
+    margin: 0 auto;
+    margin-top: calc((100vh - 560px - 2*18px)/2);
+}
+
+@media screen and (max-height: calc(560px + 2*18px)) {
+    .form-container {
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .form-container {
+        width: calc(100% - 2*30px);
+        justify-items: center;
+    }
+}

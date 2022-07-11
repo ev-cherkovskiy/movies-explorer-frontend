@@ -1,0 +1,11 @@
+.search-form__icon {
+    background-image: url(../../images/search-icon.svg);
+    width: 34px;
+    height: 34px;
+}
+
+@media screen and (max-width: 650px) {
+    .search-form__icon {
+        display: none;
+    }
+}
