@@ -21,7 +21,7 @@ function Login({ handleLogin, onRedirectionButtonClick }) {
     // add auto-login if token already exists
 
     return (
-        <div className="login">
+        <main className="login">
             <FormContainer
                 title="Рады видеть!"
                 formType="signin"
@@ -65,7 +65,7 @@ function Login({ handleLogin, onRedirectionButtonClick }) {
                 />
                 <span className="signin-password-error form__input-error" />
             </FormContainer>
-        </div>
+        </main>
     )
 }
 

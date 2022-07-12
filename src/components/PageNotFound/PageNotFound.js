@@ -3,7 +3,7 @@ import React from "react";
 function PageNotFound({ onButtonClick}) {
 
     return (
-        <div className="page-not-found">
+        <main className="page-not-found">
             <div className="page-not-found__message">
                 <p className="page-not-found__message-code">
                     404
@@ -19,7 +19,7 @@ function PageNotFound({ onButtonClick}) {
             >
                 Назад
             </button>
-        </div>
+        </main>
     )
 }
 

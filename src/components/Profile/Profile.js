@@ -18,7 +18,7 @@ function Profile({ initialName, initialEmail, handleEditProfile, handleLogout })
     }
 
     return (
-        <div className="form-container form-container_type_profile">
+        <main className="form-container form-container_type_profile">
             <h2 className="form-container__title form-container__title_type_profile">
                 {`Привет, ${initialName}!`}
             </h2>
@@ -81,8 +81,7 @@ function Profile({ initialName, initialEmail, handleEditProfile, handleLogout })
                 onClick={handleLogout}>
                 Выйти из аккаунта
             </button>
-
-        </div>
+        </main>
     )
 }
 export default Profile;

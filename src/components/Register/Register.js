@@ -24,7 +24,7 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
     }
 
     return (
-        <div className="register">
+        <main className="register">
             <FormContainer
                 title="Добро пожаловать!"
                 formType="signup"
@@ -84,7 +84,7 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
                 />
                 <span className="signup-password-error form__input-error" />
             </FormContainer>
-        </div>
+        </main>
     )
 }
 

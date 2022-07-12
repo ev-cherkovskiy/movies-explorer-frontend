@@ -19,7 +19,7 @@ function Movies({ pageState, movies, handleSearch, handleButtonClick }) {
     }, [pageState, movies.length]);
 
     return (
-        <div className="movies">
+        <main className="movies">
             <SearchForm
                 handleSearch={handleSearch}
             />
@@ -37,7 +37,7 @@ function Movies({ pageState, movies, handleSearch, handleButtonClick }) {
                     Ещё
                 </button>
             )}
-        </div>
+        </main>
     )
 }
 

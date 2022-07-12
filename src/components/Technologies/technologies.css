@@ -3,3 +3,9 @@
     display: flex;
     flex-flow: column nowrap;
 }
+
+@media screen and (max-width: 400px) {
+    .technologies {
+        background-color: #ffffff;
+    }
+}
