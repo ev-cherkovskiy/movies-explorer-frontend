@@ -1,0 +1,9 @@
+.cover {
+    background-color: #f3c1f8;
+    height: calc(100vh - 74px - 66px);
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    position: relative;
+    min-height: 500px;
+}

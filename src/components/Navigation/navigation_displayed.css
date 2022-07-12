@@ -1,0 +1,11 @@
+/* @media screen and (max-width: 800px) {
+    .navigation_hidden {
+        display: none;
+    }
+} */
+
+.navigation_displayed {
+    /* display: none; */
+    display: grid;
+    /* grid-template-columns: 1fr 1fr; */
+}

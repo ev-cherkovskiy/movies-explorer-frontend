@@ -1,0 +1,47 @@
+.about-me-infobox {
+    padding: 0 70px 100px;
+    display: grid;
+    grid-template-columns: minmax(min-content, 600px) 270px;
+    grid-template-rows: min-content min-content 117px;
+    grid-template-areas:
+        "name photo"
+        "paragraph photo"
+        "socials photo";
+    width: calc(100% - 70px*2);
+    margin: 0 auto;
+    column-gap: 49px;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 800px) {
+    .about-me-infobox {
+        padding: 0 50px 100px;
+        width: calc(100% - 50px*2);
+    }
+}
+
+@media screen and (max-width: calc(197px + 49px + 400px + 2*50px)) {
+    .about-me-infobox {
+        grid-template-columns: minmax(min-content, 600px) 200px;
+    }
+}
+
+/* @media screen and (max-width: 560px) {
+    .about-me-infobox {
+        grid-template-columns: minmax(min-content, 600px) 150px;
+    }
+} */
+
+@media screen and (max-width: 650px) {
+    .about-me-infobox {
+        grid-template-columns: 1fr;
+        grid-template-rows: 352px repeat(3, min-content);
+        grid-template-areas:
+            "photo"
+            "name"
+            "paragraph"
+            "socials";
+        padding: 0 14px 70px;
+        width: calc(100% - 14px*2);
+    }
+}

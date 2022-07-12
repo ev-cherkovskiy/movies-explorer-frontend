@@ -1,0 +1,16 @@
+.navigation__button_type_account {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    column-gap: 17px;
+    cursor: pointer;
+    justify-self: flex-end;
+}
+
+@media screen and (max-width: 800px) {
+    .navigation__button_type_account {
+        justify-self: center;
+        align-self: flex-end; 
+        margin-bottom: 92px;
+    }
+}

@@ -1,0 +1,26 @@
+.navigation {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .navigation {
+        background-color: #ffffff;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        height: 100vh;
+        width: calc(2/3*100vw);
+        z-index: 1;
+        position: fixed;
+        top: 0;
+        right: 0;
+        display: none;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .navigation {
+        width: 100vw;
+    }
+}

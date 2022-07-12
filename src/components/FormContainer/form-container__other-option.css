@@ -1,0 +1,16 @@
+.form-container__other-option {
+    margin: 16px 0 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    column-gap: 6px;
+    font-size: 14px;
+    line-height: 1.21;
+    font-weight: 400;
+}
+
+@media screen and (max-width: 650px) {
+    .form-container__other-option {
+        font-size: 12px;
+    }
+}

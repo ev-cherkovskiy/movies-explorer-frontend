@@ -1,0 +1,26 @@
+.technologies-list {
+    width: calc(100% - 70px*2);
+    padding: 100px 70px;
+    margin: 0 auto;
+    list-style-type: none;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fit, 90px);
+    grid-template-rows: repeat(auto-fit, 60px);
+    justify-content: center;
+}
+
+@media screen and (max-width: 829px) {
+    .technologies-list {
+        width: calc(100% - 60px*2);
+        padding: 100px 0;
+        grid-template-columns: repeat(auto-fit, 84px);
+        grid-template-rows: repeat(auto-fit, 57px);
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .technologies-list {
+        padding: 50px 0 70px;
+    }
+}

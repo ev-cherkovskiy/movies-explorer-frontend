@@ -1,0 +1,13 @@
+.paragraph_centered {
+    text-align: center;
+    padding: 0 70px;
+    margin: 0;
+    align-self: center;
+    justify-self: center;
+}
+
+@media screen and (max-width: 450px) {
+    .paragraph_centered {
+        padding: 0 15px;
+    }
+}

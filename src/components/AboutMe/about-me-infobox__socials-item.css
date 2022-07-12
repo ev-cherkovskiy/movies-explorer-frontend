@@ -1,0 +1,16 @@
+.about-me-infobox__socials-item {
+    font-size: 14px;
+    line-height: 1.21;
+    font-weight: 500;
+    text-decoration: none;
+    color: #000000;
+    transition: opacity ease .3s;
+}
+
+.about-me-infobox__socials-item:visited {
+    color: #000000;
+}
+
+.about-me-infobox__socials-item:hover {
+    opacity: .6;
+}

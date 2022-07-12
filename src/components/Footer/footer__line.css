@@ -1,0 +1,12 @@
+.footer__line {
+    width: 100%;
+    height: 1px;
+    background-color: #e8e8e8;
+    margin: 20px 0;
+}
+
+@media screen and (max-width: 650px) {
+    .footer__line {
+        margin: 20px 0 30px;
+    }
+}

@@ -1,0 +1,16 @@
+.filter-checkbox {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 12px;
+    align-items: center;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: opacity ease .3s;
+}
+
+.filter-checkbox:hover {
+    opacity: .6;
+}

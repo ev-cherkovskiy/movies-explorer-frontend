@@ -1,0 +1,13 @@
+.footer__container-link {
+    color: #000000;
+    text-decoration: none;
+    transition: opacity ease .3s;
+}
+
+.footer__container-link:visited {
+    color: #000000;
+}
+
+.footer__container-link:hover {
+    opacity: .6;
+}

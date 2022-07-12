@@ -1,0 +1,16 @@
+.cover__image {
+    width: calc(100% - 2*36px);
+    max-width: 320px;
+    height: 320px;
+    background-image: url(../../images/cover-image.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    top: calc(50% - 320px/2 - 40px);
+}
+
+@media screen and (max-width: 400px) {
+    .cover__image {
+        top: calc(50% - (100vw - 2*36px)/2 - 40px);
+    }
+}

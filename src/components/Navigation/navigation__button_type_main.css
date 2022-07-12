@@ -1,0 +1,9 @@
+.navigation__button_type_main {
+    display: none;
+}
+
+@media screen and (max-width: 800px) {
+    .navigation__button_type_main {
+        display: inline;
+    }
+}

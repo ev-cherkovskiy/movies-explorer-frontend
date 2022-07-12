@@ -1,0 +1,27 @@
+.navigation-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 10vw;
+    background-color: aqua;
+    width: 90vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: #000000;
+    opacity: .3;
+}
+
+/* @media screen and (max-width: 800px) {
+    .navigation-overlay {
+        /* display: block; 
+        position: fixed;
+        top: 0;
+        right: 10vw;
+        background-color: aqua;
+        width: 90vw;
+        height: 100vh;
+        z-index: 1;
+        background-color: #000000;
+        opacity: .3;
+    }
+} */

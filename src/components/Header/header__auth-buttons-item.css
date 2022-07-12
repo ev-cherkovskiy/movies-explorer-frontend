@@ -1,0 +1,15 @@
+.header__auth-buttons-item {
+    font-size: 12px;
+    line-height: 1.33;
+    font-weight: 500;
+    background-color: transparent;
+    color: #000000;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity ease .3s;
+}
+
+.header__auth-buttons-item:hover {
+    opacity: .6;
+}

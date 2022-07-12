@@ -1,0 +1,6 @@
+.header__auth-buttons {
+    justify-self: flex-end;
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 30px;
+}

@@ -1,0 +1,8 @@
+.movies-card__heading-duration {
+    margin: 0;
+    grid-area: duration;
+    font-size: 11px;
+    line-height: 1.21;
+    font-weight: 400;
+    color: #a0a0a0;
+}

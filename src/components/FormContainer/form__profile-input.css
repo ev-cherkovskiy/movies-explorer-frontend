@@ -1,0 +1,23 @@
+.form__profile-input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    font-size: 11px;
+    line-height: 1.21;
+    font-weight: 400;
+    padding: 0;
+    text-align: right;
+    transition: opacity ease .3s;
+    cursor: pointer;
+    padding: 13px 0;
+}
+
+.form__profile-input:hover {
+    opacity: .6;
+}
+
+.form__profile-input:focus {
+    outline: none;
+    opacity: 1;
+    cursor: text;
+}

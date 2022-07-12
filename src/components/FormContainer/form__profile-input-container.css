@@ -1,0 +1,25 @@
+.form__profile-input-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    /* column-gap: 20px; */
+    font-size: 11px;
+    line-height: 1.21;
+    font-weight: 500;
+}
+
+.form__profile-input-container:focus-within {
+    outline: 2px solid #f3c1f8;
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+.form__profile-input-container:first-of-type {
+    margin-bottom: 3px;
+    /* padding-top: 70px; */
+}
+
+.form__profile-input-container:last-of-type {
+    margin-top: 3px;
+}

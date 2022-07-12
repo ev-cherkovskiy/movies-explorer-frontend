@@ -1,0 +1,11 @@
+.form-container_type_profile {
+    grid-template-rows: min-content auto min-content;
+    margin-top: calc((100vh - 560px - 2*18px)/2 - 74px);
+    justify-items: center;
+} 
+
+@media screen and (max-height: calc(560px + 2*18px + 2*74px)) {
+    .form-container_type_profile {
+        margin-top: 0;
+    }
+}

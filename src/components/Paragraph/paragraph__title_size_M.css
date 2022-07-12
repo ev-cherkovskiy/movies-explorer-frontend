@@ -1,0 +1,20 @@
+.paragraph__title_size_M {
+    font-size: 18px;
+    line-height: 1.11;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 800px) {
+    .paragraph__title_size_M {
+        margin-bottom: 20px;
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .paragraph__title_size_M {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+}
