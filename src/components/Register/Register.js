@@ -1,5 +1,6 @@
 import React from "react";
 import FormContainer from "../FormContainer/FormContainer";
+import validate from "../../utils/inputValidation";
 
 function Register({ handleRegister, onRedirectionButtonClick }) {
     const [name, setName] = React.useState('');
@@ -23,6 +24,20 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
         handleRegister();
     }
 
+
+    const [isNameValid, setIsNameValid] = React.useState(false);
+    const [isEmailValid, setIsEmailValid] = React.useState(false);
+    const [isPasswordValid, setIsPasswordValid] = React.useState(false);
+
+    const validateName = () => validate(name, /([а-яА-Яёa-z][\s\-]{0,1})+/i, setIsNameValid);
+    const validateEmail = () => validate(email, /[a-z\d\-\.\_]+\@[a-z]+\.[a-z]{2,}/i, setIsEmailValid);
+    const validatePassword = () => validate(password, /[^\sа-яё]+/i, setIsPasswordValid);
+
+    React.useEffect(validateName, [name]);
+    React.useEffect(validateEmail, [email]);
+    React.useEffect(validatePassword, [password]);
+
+
     return (
         <main className="register">
             <FormContainer
@@ -34,6 +49,7 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
                 otherOptionButtonText="Войти"
                 redirectionPath="/signin"
                 onRedirectionButtonClick={onRedirectionButtonClick}
+                isButtonDisabled={!isNameValid || !isEmailValid || !isPasswordValid}
             >
                 <p className="form__input-title">
                     Имя
@@ -49,8 +65,13 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
                     required
                     value={name || ''}
                     onChange={handleNameChange}
+                    style={isNameValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
                 />
-                <span className="signup-name-error form__input-error" />
+                {!isNameValid && (
+                    <span className="form__input-error">
+                        От 2 до 30 букв. Допускается дефис и пробел.
+                    </span>
+                )}
                 <p className="form__input-title">
                     E-mail
                 </p>
@@ -65,8 +86,13 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
                     required
                     value={email || ''}
                     onChange={handleEmailChange}
+                    style={isEmailValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
                 />
-                <span className="signup-email-error form__input-error" />
+                {!isEmailValid && (
+                    <span className="form__input-error">
+                        В общепринятом формате электронной почты.
+                    </span>
+                )}
                 <p className="form__input-title">
                     Пароль
                 </p>
@@ -81,8 +107,13 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
                     required
                     value={password || ''}
                     onChange={handlePasswordChange}
+                    style={isPasswordValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
                 />
-                <span className="signup-password-error form__input-error" />
+                {!isPasswordValid && (
+                    <span className="form__input-error">
+                        От 2 до 30 символов, кроме пробелов и русских букв.
+                    </span>
+                )}
             </FormContainer>
         </main>
     )

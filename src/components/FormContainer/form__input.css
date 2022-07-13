@@ -11,5 +11,6 @@
 }
 
 .form__input:focus {
-    outline: 2px solid #f3c1f8;
+    /* outline: 2px solid #f3c1f8; */
+    outline: 2px solid #000000;
 }

@@ -2,7 +2,18 @@ import React from "react";
 import LogoButton from "../LogoButton/LogoButton";
 import Button from "../Button/Button";
 
-function FormContainer({ title, formType, handleSubmit, buttonText, otherOptionText, otherOptionButtonText, onRedirectionButtonClick, redirectionPath, children }) {
+function FormContainer({
+    title,
+    formType,
+    handleSubmit,
+    buttonText,
+    otherOptionText,
+    otherOptionButtonText,
+    onRedirectionButtonClick,
+    redirectionPath,
+    isButtonDisabled = false,
+    children
+}) {
 
     return (
         <div className="form-container">
@@ -23,6 +34,7 @@ function FormContainer({ title, formType, handleSubmit, buttonText, otherOptionT
                 <button
                     className="form__submit-button"
                     type="submit"
+                    disabled={isButtonDisabled}
                 >
                     {buttonText}
                 </button>

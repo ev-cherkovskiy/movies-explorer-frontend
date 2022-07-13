@@ -1,5 +1,6 @@
 import React from "react";
 import FormContainer from "../FormContainer/FormContainer";
+import validate from "../../utils/inputValidation";
 
 function Login({ handleLogin, onRedirectionButtonClick }) {
     const [email, setEmail] = React.useState('');
@@ -18,6 +19,16 @@ function Login({ handleLogin, onRedirectionButtonClick }) {
         handleLogin();
     }
 
+    const [isEmailValid, setIsEmailValid] = React.useState(false);
+    const [isPasswordValid, setIsPasswordValid] = React.useState(false);
+
+    const validateEmail = () => validate(email, /[a-z\d\-\.\_]+\@[a-z]+\.[a-z]{2,}/i, setIsEmailValid);
+    const validatePassword = () => validate(password, /[^\sа-яё]+/i, setIsPasswordValid);
+
+    React.useEffect(validateEmail, [email]);
+    React.useEffect(validatePassword, [password]);
+
+
     // add auto-login if token already exists
 
     return (
@@ -31,6 +42,7 @@ function Login({ handleLogin, onRedirectionButtonClick }) {
                 otherOptionButtonText="Регистрация"
                 redirectionPath="/signup"
                 onRedirectionButtonClick={onRedirectionButtonClick}
+                isButtonDisabled={!isEmailValid || !isPasswordValid}
             >
                 <p className="form__input-title">
                     E-mail
@@ -46,8 +58,13 @@ function Login({ handleLogin, onRedirectionButtonClick }) {
                     required
                     value={email || ''}
                     onChange={handleEmailChange}
+                    style={isEmailValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
                 />
-                <span className="signin-email-error form__input-error" />
+                {!isEmailValid && (
+                    <span className="form__input-error">
+                        В общепринятом формате электронной почты.
+                    </span>
+                )}
                 <p className="form__input-title">
                     Пароль
                 </p>
@@ -62,8 +79,13 @@ function Login({ handleLogin, onRedirectionButtonClick }) {
                     required
                     value={password || ''}
                     onChange={handlePasswordChange}
+                    style={isPasswordValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
                 />
-                <span className="signin-password-error form__input-error" />
+                {!isPasswordValid && (
+                    <span className="form__input-error">
+                        От 2 до 30 символов, кроме пробелов и русских букв.
+                    </span>
+                )}
             </FormContainer>
         </main>
     )

@@ -16,6 +16,15 @@
     opacity: .6;
 }
 
+.form__submit-button:disabled {
+    background-color: #a0a0a0;
+    cursor: default;
+}
+
+.form__submit-button:disabled:hover {
+    opacity: 1;
+}
+
 @media screen and (max-width: 650px) {
     .form__submit-button {
         font-size: 12px;
