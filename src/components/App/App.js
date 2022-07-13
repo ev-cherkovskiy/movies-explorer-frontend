@@ -13,8 +13,6 @@ import fakeMoviesArray from "../../utils/fakeMovies";
 import PageNotFound from "../PageNotFound/PageNotFound";
 
 function App() {
-  // на 4 этапе: отправка запросов, обработка ответов, валидация форм, работа прелоудера, описание хэндлеров
-
   const location = useLocation();
   const navigate = useNavigate();
 
