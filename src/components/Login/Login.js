@@ -2,9 +2,16 @@ import React from "react";
 import FormContainer from "../FormContainer/FormContainer";
 import validate from "../../utils/inputValidation";
 
-function Login({ handleLogin, onRedirectionButtonClick }) {
+function Login({
+    handleLogin,
+    onRedirectionButtonClick,
+    handleAutologin
+}) {
+
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [isEmailValid, setIsEmailValid] = React.useState(false);
+    const [isPasswordValid, setIsPasswordValid] = React.useState(false);
 
     const handleEmailChange = (evt) => {
         setEmail(evt.target.value);
@@ -16,11 +23,10 @@ function Login({ handleLogin, onRedirectionButtonClick }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        handleLogin();
+        handleLogin(email, password);
+        setEmail("");
+        setPassword("");
     }
-
-    const [isEmailValid, setIsEmailValid] = React.useState(false);
-    const [isPasswordValid, setIsPasswordValid] = React.useState(false);
 
     const validateEmail = () => validate(email, /[a-z\d\-\.\_]+\@[a-z]+\.[a-z]{2,}/i, setIsEmailValid);
     const validatePassword = () => validate(password, /[^\sа-яё]+/i, setIsPasswordValid);
@@ -28,15 +34,16 @@ function Login({ handleLogin, onRedirectionButtonClick }) {
     React.useEffect(validateEmail, [email]);
     React.useEffect(validatePassword, [password]);
 
-
-    // add auto-login if token already exists
+    React.useEffect(() => {
+        handleAutologin();
+    }, []);
 
     return (
         <main className="login">
             <FormContainer
                 title="Рады видеть!"
                 formType="signin"
-                onSubmit={handleSubmit}
+                handleSubmit={handleSubmit}
                 buttonText="Войти"
                 otherOptionText="Ещё не зарегистрированы?"
                 otherOptionButtonText="Регистрация"

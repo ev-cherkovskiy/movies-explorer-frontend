@@ -1,6 +1,11 @@
 import React from "react";
 
-function Paragraph({ title, titleSize, isCentered, children }) {
+function Paragraph({ 
+    title, 
+    titleSize, 
+    isCentered, 
+    children 
+}) {
 
     const centeringParagraphStyle = isCentered ? "paragraph_centered" : "";
 

@@ -11,10 +11,11 @@ function SearchForm({ handleSearch }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        handleSearch();
+        handleSearch(movie, areShortMoviesChecked);
     }
 
     const toggleCheckboxState = () => {
+        handleSearch(movie, !areShortMoviesChecked);
         setAreShortMoviesChecked(!areShortMoviesChecked);
     }
 

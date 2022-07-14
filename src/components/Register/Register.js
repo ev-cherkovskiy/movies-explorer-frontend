@@ -3,9 +3,13 @@ import FormContainer from "../FormContainer/FormContainer";
 import validate from "../../utils/inputValidation";
 
 function Register({ handleRegister, onRedirectionButtonClick }) {
+
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [isNameValid, setIsNameValid] = React.useState(false);
+    const [isEmailValid, setIsEmailValid] = React.useState(false);
+    const [isPasswordValid, setIsPasswordValid] = React.useState(false);
 
     const handleNameChange = (evt) => {
         setName(evt.target.value);
@@ -21,13 +25,11 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        handleRegister();
+        handleRegister(name, email, password);
+        setName("");
+        setEmail("");
+        setPassword("");
     }
-
-
-    const [isNameValid, setIsNameValid] = React.useState(false);
-    const [isEmailValid, setIsEmailValid] = React.useState(false);
-    const [isPasswordValid, setIsPasswordValid] = React.useState(false);
 
     const validateName = () => validate(name, /([а-яА-Яёa-z][\s\-]{0,1})+/i, setIsNameValid);
     const validateEmail = () => validate(email, /[a-z\d\-\.\_]+\@[a-z]+\.[a-z]{2,}/i, setIsEmailValid);
@@ -37,13 +39,12 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
     React.useEffect(validateEmail, [email]);
     React.useEffect(validatePassword, [password]);
 
-
     return (
         <main className="register">
             <FormContainer
                 title="Добро пожаловать!"
                 formType="signup"
-                onSubmit={handleSubmit}
+                handleSubmit={handleSubmit}
                 buttonText="Зарегистрироваться"
                 otherOptionText="Уже зарегистрированы?"
                 otherOptionButtonText="Войти"

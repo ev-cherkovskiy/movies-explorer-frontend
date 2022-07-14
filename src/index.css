@@ -41,6 +41,7 @@
 @import url(./components/FormContainer/form__input.css);
 @import url(./components/FormContainer/form__input-title.css);
 @import url(./components/FormContainer/form__input-error.css);
+@import url(./components/FormContainer/form__input-error_type_profile.css);
 
 /* Шапка */
 @import url(./components/Header/header.css);
@@ -164,6 +165,7 @@
 
 /* Сетка с карточками */
 @import url(./components/CardList/card-list.css);
+@import url(./components/CardList/no-result.css);
 
 /* Секция с фильмами (только кнопка "показать ещё") */
 @import url(./components/Movies/movies__show-more-button.css);
@@ -174,3 +176,11 @@
 @import url(./components/PageNotFound/page-not-found__message-code.css);
 @import url(./components/PageNotFound/page-not-found__message-text.css);
 @import url(./components/PageNotFound/page-not-found__button.css);
+
+/* Попап с оповещением об ошибке */
+@import url(./components/InfoPopup/info-popup.css);
+@import url(./components/InfoPopup/info-popup_open.css);
+@import url(./components/InfoPopup/info-popup__container.css);
+@import url(./components/InfoPopup/info-popup__title.css);
+@import url(./components/InfoPopup/info-popup__message.css);
+@import url(./components/InfoPopup/info-popup__button.css);

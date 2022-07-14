@@ -1,8 +1,17 @@
 import React from "react";
+import validate from "../../utils/inputValidation";
 
-function Profile({ initialName, initialEmail, handleEditProfile, handleLogout }) {
+function Profile({ 
+    initialName, 
+    initialEmail, 
+    handleEditProfile, 
+    handleLogout 
+}) {
+
     const [name, setName] = React.useState(initialName);
     const [email, setEmail] = React.useState(initialEmail);
+    const [isNameValid, setIsNameValid] = React.useState(false);
+    const [isEmailValid, setIsEmailValid] = React.useState(false);
 
     const handleNameChange = (evt) => {
         setName(evt.target.value);
@@ -14,8 +23,14 @@ function Profile({ initialName, initialEmail, handleEditProfile, handleLogout })
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        handleEditProfile();
+        handleEditProfile(name, email);
     }
+
+    const validateName = () => validate(name, /([а-яА-Яёa-z][\s\-]{0,1})+/i, setIsNameValid);
+    const validateEmail = () => validate(email, /[a-z\d\-\.\_]+\@[a-z]+\.[a-z]{2,}/i, setIsEmailValid);
+
+    React.useEffect(validateName, [name]);
+    React.useEffect(validateEmail, [email]);
 
     return (
         <main className="form-container form-container_type_profile">
@@ -47,7 +62,11 @@ function Profile({ initialName, initialEmail, handleEditProfile, handleLogout })
                             onChange={handleNameChange}
                         />
                     </div>
-                    <span className="profile-name-error form__input-error" />
+                    {!isNameValid && (
+                        <span className="form__input-error form__input-error_type_profile">
+                            От 2 до 30 букв. Допускается дефис и пробел.
+                        </span>
+                    )}
                     <div className="form__profile-inputs-divider" />
                     <div className="form__profile-input-container">
                         <p className="form__profile-input-title">
@@ -66,11 +85,16 @@ function Profile({ initialName, initialEmail, handleEditProfile, handleLogout })
                             onChange={handleEmailChange}
                         />
                     </div>
-                    <span className="profile-email-error form__input-error" />
+                    {!isEmailValid && (
+                        <span className="form__input-error form__input-error_type_profile">
+                            В общепринятом формате электронной почты.
+                        </span>
+                    )}
                 </div>
                 <button
                     className="form__profile-submit-button"
                     type="submit"
+                    disabled={!isNameValid || !isEmailValid || (name === initialName && email === initialEmail)}
                 >
                     Редактировать
                 </button>

@@ -16,3 +16,12 @@
 .form__profile-submit-button:hover {
     opacity: .6;
 }
+
+.form__profile-submit-button:disabled {
+    cursor: default;
+    color: #a0a0a0;
+}
+
+.form__profile-submit-button:disabled:hover {
+    opacity: 1;
+}

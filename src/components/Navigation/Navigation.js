@@ -1,10 +1,16 @@
 import React from "react";
 import Button from "../Button/Button";
 
-function Navigation({ pageState, isMenuOpen, onCloseButtonClick, onButtonClick }) {
+function Navigation({ 
+    pageState, 
+    isMenuOpen, 
+    onCloseButtonClick, 
+    onButtonClick, 
+    loggedIn 
+}) {
 
     return (
-        !["/", "/signup", "/signin"].includes(pageState) && (
+        !["/signup", "/signin"].includes(pageState) && loggedIn && (
             <>
                 <div className={`navigation-overlay ${!isMenuOpen ? "" : "navigation-overlay_displayed"}`} />
                 <button
