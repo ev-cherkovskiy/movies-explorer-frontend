@@ -1,9 +1,16 @@
 import React from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-function SearchForm({ handleSearch }) {
-    const [movie, setMovie] = React.useState('');
-    const [areShortMoviesChecked, setAreShortMoviesChecked] = React.useState(true);
+function SearchForm({
+    handleSearch,
+    handleCheckboxClick,
+    movieName,
+    isCheckboxChecked,
+    pageState
+}) {
+
+    const [movie, setMovie] = React.useState(pageState === "/movies" ? movieName : "");
+    const [areShortMoviesChecked, setAreShortMoviesChecked] = React.useState(isCheckboxChecked);
 
     const handleMovieChange = (evt) => {
         setMovie(evt.target.value);
@@ -11,12 +18,19 @@ function SearchForm({ handleSearch }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        handleSearch();
+        handleSearch(movie, areShortMoviesChecked);
     }
 
     const toggleCheckboxState = () => {
+        handleSearch(movie, !areShortMoviesChecked);
+        handleCheckboxClick(!areShortMoviesChecked);
         setAreShortMoviesChecked(!areShortMoviesChecked);
     }
+
+    React.useEffect(() => {
+        setMovie(pageState === "/movies" ? movieName : "");
+        setAreShortMoviesChecked(isCheckboxChecked);
+    }, [pageState])
 
     return (
         <div className="search-form-container">

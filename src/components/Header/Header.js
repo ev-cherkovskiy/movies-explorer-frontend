@@ -3,7 +3,14 @@ import Navigation from "../Navigation/Navigation";
 import Button from "../Button/Button";
 import LogoButton from "../LogoButton/LogoButton";
 
-function Header({ pageState, isMenuOpen, onCloseButtonClick, onOpenButtonClick, onButtonClick }) {
+function Header({
+    pageState,
+    isMenuOpen,
+    onCloseButtonClick,
+    onOpenButtonClick,
+    onButtonClick,
+    loggedIn
+}) {
 
     return (
         <header className={`header ${pageState === "/" ? "header_color_pink" : "header_color_white"}`}>
@@ -13,8 +20,9 @@ function Header({ pageState, isMenuOpen, onCloseButtonClick, onOpenButtonClick, 
                 isMenuOpen={isMenuOpen}
                 onCloseButtonClick={onCloseButtonClick}
                 onButtonClick={onButtonClick}
+                loggedIn={loggedIn}
             />
-            <div className={`header__auth-buttons ${pageState === "/" ? "" : "header__auth-buttons_hidden"}`}>
+            <div className={`header__auth-buttons ${!loggedIn ? "" : "header__auth-buttons_hidden"}`}>
                 <Button
                     className="header__auth-buttons-item"
                     path="/signup"
@@ -31,7 +39,7 @@ function Header({ pageState, isMenuOpen, onCloseButtonClick, onOpenButtonClick, 
                 </Button>
             </div>
             <button
-                className={`${["/", "/signup", "/signin"].includes(pageState) ? "header__burger-button_hidden" : "header__burger-button"}`}
+                className={`${["/signup", "/signin"].includes(pageState) || !loggedIn ? "header__burger-button_hidden" : "header__burger-button"}`}
                 onClick={onOpenButtonClick}
             />
         </header>
