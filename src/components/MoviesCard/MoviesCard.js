@@ -1,4 +1,5 @@
 import React from "react";
+import { HOUR } from "../../utils/constants";
 
 function MoviesCard({ 
     movie, 
@@ -18,10 +19,10 @@ function MoviesCard({
                     {movie.nameRU}
                 </p>
                 <p className="movies-card__heading-duration">
-                    {Math.trunc(movie.duration / 60) !== 0 ? (
-                        `${Math.trunc(movie.duration / 60)}ч ${movie.duration % 60}м`
+                    {Math.trunc(movie.duration / HOUR) !== 0 ? (
+                        `${Math.trunc(movie.duration / HOUR)}ч ${movie.duration % HOUR}м`
                     ) : (
-                        `${movie.duration % 60}м`
+                        `${movie.duration % HOUR}м`
                     )}
                 </p>
                 <button

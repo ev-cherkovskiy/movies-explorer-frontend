@@ -39,7 +39,7 @@ function Header({
                 </Button>
             </div>
             <button
-                className={`${["/signup", "/signin"].includes(pageState) ? "header__burger-button_hidden" : "header__burger-button"}`}
+                className={`${["/signup", "/signin"].includes(pageState) || !loggedIn ? "header__burger-button_hidden" : "header__burger-button"}`}
                 onClick={onOpenButtonClick}
             />
         </header>

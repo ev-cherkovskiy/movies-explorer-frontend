@@ -1,6 +1,7 @@
 import React from "react";
 import FormContainer from "../FormContainer/FormContainer";
 import validate from "../../utils/inputValidation";
+import { INVALID_INPUT_BG_COLOR, REG_EXP_EMAIL, REG_EXP_PASSWORD } from "../../utils/constants";
 
 function Login({
     handleLogin,
@@ -12,6 +13,7 @@ function Login({
     const [password, setPassword] = React.useState('');
     const [isEmailValid, setIsEmailValid] = React.useState(false);
     const [isPasswordValid, setIsPasswordValid] = React.useState(false);
+    const [isWaiting, setIsWaiting] = React.useState(false);
 
     const handleEmailChange = (evt) => {
         setEmail(evt.target.value);
@@ -23,13 +25,15 @@ function Login({
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        handleLogin(email, password);
-        setEmail("");
-        setPassword("");
+        setIsWaiting(true);
+        handleLogin(email, password)
+            .finally(() => {
+                setIsWaiting(false);
+            });
     }
 
-    const validateEmail = () => validate(email, /[a-z\d\-\.\_]+\@[a-z]+\.[a-z]{2,}/i, setIsEmailValid);
-    const validatePassword = () => validate(password, /[^\sа-яё]+/i, setIsPasswordValid);
+    const validateEmail = () => validate(email, REG_EXP_EMAIL, setIsEmailValid);
+    const validatePassword = () => validate(password, REG_EXP_PASSWORD, setIsPasswordValid);
 
     React.useEffect(validateEmail, [email]);
     React.useEffect(validatePassword, [password]);
@@ -49,7 +53,7 @@ function Login({
                 otherOptionButtonText="Регистрация"
                 redirectionPath="/signup"
                 onRedirectionButtonClick={onRedirectionButtonClick}
-                isButtonDisabled={!isEmailValid || !isPasswordValid}
+                isButtonDisabled={!isEmailValid || !isPasswordValid || isWaiting}
             >
                 <p className="form__input-title">
                     E-mail
@@ -65,7 +69,8 @@ function Login({
                     required
                     value={email || ''}
                     onChange={handleEmailChange}
-                    style={isEmailValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
+                    style={isEmailValid ? { backgroundColor: "" } : { backgroundColor: INVALID_INPUT_BG_COLOR }}
+                    disabled={isWaiting}
                 />
                 {!isEmailValid && (
                     <span className="form__input-error">
@@ -86,7 +91,8 @@ function Login({
                     required
                     value={password || ''}
                     onChange={handlePasswordChange}
-                    style={isPasswordValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
+                    style={isPasswordValid ? { backgroundColor: "" } : { backgroundColor: INVALID_INPUT_BG_COLOR }}
+                    disabled={isWaiting}
                 />
                 {!isPasswordValid && (
                     <span className="form__input-error">

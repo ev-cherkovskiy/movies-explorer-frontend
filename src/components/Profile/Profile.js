@@ -1,4 +1,5 @@
 import React from "react";
+import { REG_EXP_EMAIL, REG_EXP_NAME } from "../../utils/constants";
 import validate from "../../utils/inputValidation";
 
 function Profile({ 
@@ -25,9 +26,9 @@ function Profile({
         evt.preventDefault();
         handleEditProfile(name, email);
     }
-
-    const validateName = () => validate(name, /([а-яА-Яёa-z][\s\-]{0,1})+/i, setIsNameValid);
-    const validateEmail = () => validate(email, /[a-z\d\-\.\_]+\@[a-z]+\.[a-z]{2,}/i, setIsEmailValid);
+    
+    const validateName = () => validate(name, REG_EXP_NAME, setIsNameValid);
+    const validateEmail = () => validate(email, REG_EXP_EMAIL, setIsEmailValid);
 
     React.useEffect(validateName, [name]);
     React.useEffect(validateEmail, [email]);

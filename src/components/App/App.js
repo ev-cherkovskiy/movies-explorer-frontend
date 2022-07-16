@@ -5,6 +5,7 @@ import mainApi from "../../utils/MainApi";
 import moviesApi from "../../utils/MoviesApi";
 import * as auth from '../../utils/auth';
 import ProtectedRoute from "../ProtectedRoute";
+import ProtectedRouteForLoggedIn from "../ProtectedRouteForLoggedIn";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Main from "../Main/Main";
@@ -14,6 +15,12 @@ import Profile from "../Profile/Profile";
 import Movies from "../Movies/Movies";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import InfoPopup from "../InfoPopup/InfoPopup";
+import {
+  BASIC_ERROR_MESSAGE,
+  EDIT_PROFILE_ERROR_404_MESSAGE,
+  EDIT_PROFILE_MESSAGE,
+  SHORT_MOVIE_DURATION
+} from "../../utils/constants";
 
 function App() {
   const location = useLocation();
@@ -31,6 +38,8 @@ function App() {
   const [filteredMovies, setFilteredMovies] = React.useState(movies);
   const [filteredSavedMovies, setFilteredSavedMovies] = React.useState(savedMovies);
   const [isPreloaderShown, setIsPreloaderShown] = React.useState(false);
+  const [isCheckboxChecked, setIsCheckboxChecked] = React.useState((localStorage.getItem("isCheckboxChecked") === "0" ? false : true));
+  const [isSavedCheckboxChecked, setIsSavedCheckboxChecked] = React.useState(true);
 
   // Общие обработчики
 
@@ -40,9 +49,12 @@ function App() {
       Promise.all([mainApi.getUserInfo(), mainApi.getMovies(), moviesApi.getMovies()])
         .then(([userData, savedMoviesArray, moviesArray]) => {
           setCurrentUser(userData.user);
+          localStorage.setItem("name", userData.user.name);
+          localStorage.setItem("email", userData.user.email);
           setSavedMovies(savedMoviesArray.movies);
           setMovies(moviesArray);
-          setFilteredMovies(moviesArray);
+          setFilteredMovies(JSON.parse(localStorage.getItem("results")) || moviesArray);
+          console.log(filteredMovies);
           setFilteredSavedMovies(savedMoviesArray.movies);
           console.log('Данные пользователя:');
           console.log(userData.user);
@@ -52,6 +64,7 @@ function App() {
           console.log(moviesArray);
           setSavedMoviesIds(savedMovies.map(movie => movie.movieId));
           setIsPreloaderShown(false);
+          if (localStorage.getItem("isCheckboxChecked") === null) setIsCheckboxChecked(true);
         })
         .catch(err => {
           console.log(err);
@@ -104,7 +117,7 @@ function App() {
   // Обработчики для аутентификации
 
   const handleLogin = (email, password) => {
-    auth.authorize(email, password)
+    return auth.authorize(email, password)
       .then(res => {
         if (res.token) {
           localStorage.setItem('token', res.token);
@@ -121,7 +134,7 @@ function App() {
   }
 
   const handleRegister = (name, email, password) => {
-    auth.register(name, email, password)
+    return auth.register(name, email, password)
       .then((res) => {
         if (res.name) {
           handleLogin(email, password);
@@ -150,6 +163,11 @@ function App() {
   const handleLogout = () => {
     setLoggedIn(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
+    localStorage.removeItem('results');
+    localStorage.removeItem('isCheckboxChecked');
+    localStorage.removeItem('movieName');
     setCurrentUser({});
     navigate("/");
   }
@@ -162,15 +180,17 @@ function App() {
         console.log(res);
         if (res.user) {
           setCurrentUser(res.user);
-          showMessage("success", "Данные пользователя изменены.")
+          localStorage.setItem("name", name);
+          localStorage.setItem("email", email);
+          showMessage("success", EDIT_PROFILE_MESSAGE);
         }
       })
       .catch((err) => {
         console.log(err);
         if (err.includes(409)) {
-          showMessage("error", "Пользователь с такими данными уже зарегистрирован.")
+          showMessage("error", EDIT_PROFILE_ERROR_404_MESSAGE);
         } else {
-          showMessage("error", "Что-то пошло не так. Пожалуйста, попробуйте позже.")
+          showMessage("error", BASIC_ERROR_MESSAGE);
         }
       });
   }
@@ -185,6 +205,7 @@ function App() {
         })
         .catch(err => {
           console.log(err);
+          showMessage("error", BASIC_ERROR_MESSAGE);
         });
     } else {
       let foundSavedMovie = savedMovies.find(item => item.movieId === movie.id);
@@ -197,6 +218,7 @@ function App() {
         })
         .catch(err => {
           console.log(err);
+          showMessage("error", BASIC_ERROR_MESSAGE);
         });
     }
   }
@@ -210,23 +232,43 @@ function App() {
       })
       .catch(err => {
         console.log(err);
+        showMessage("error", BASIC_ERROR_MESSAGE);
       });
   }
 
   //  Обработчики для поиска
 
+  const getInitialMovies = () => movies;
+
   const handleSearch = (movieName, areShortMoviesChecked) => {
     let moviesToShow = movies
       .filter(item => (item.nameRU && item.nameRU.toLowerCase().includes(movieName.toLowerCase())) || (item.nameEN && item.nameEN.toLowerCase().includes(movieName.toLowerCase())))
-      .filter(item => (item.duration >= (areShortMoviesChecked ? 0 : 40)));
-    setFilteredMovies(moviesToShow);
+      .filter(item => (item.duration >= (areShortMoviesChecked ? 0 : SHORT_MOVIE_DURATION)));
+    if (movieName) {
+      setFilteredMovies(moviesToShow);
+    } else {
+      setFilteredMovies(getInitialMovies());
+    }
+    localStorage.setItem("movieName", movieName);
+    console.log(moviesToShow);
+    localStorage.setItem("results", JSON.stringify(moviesToShow));
+    return moviesToShow;
   }
 
   const handleSavedSearch = (movieName, areShortMoviesChecked) => {
     let moviesToShow = savedMovies
       .filter(item => (item.nameRU && item.nameRU.toLowerCase().includes(movieName.toLowerCase())) || (item.nameEN && item.nameEN.toLowerCase().includes(movieName.toLowerCase())))
-      .filter(item => (item.duration >= (areShortMoviesChecked ? 0 : 40)));
+      .filter(item => (item.duration >= (areShortMoviesChecked ? 0 : SHORT_MOVIE_DURATION)));
     setFilteredSavedMovies(moviesToShow);
+  }
+
+  const handleCheckboxClick = (areShortMoviesChecked) => {
+    localStorage.setItem("isCheckboxChecked", areShortMoviesChecked ? 1 : 0);
+    setIsCheckboxChecked(areShortMoviesChecked);
+  }
+
+  const handleSavedCheckboxClick = (areShortMoviesChecked) => {
+    setIsSavedCheckboxChecked(areShortMoviesChecked);
   }
 
   return (
@@ -252,7 +294,8 @@ function App() {
           <Route
             path="/signup"
             element={
-              <Register
+              <ProtectedRouteForLoggedIn
+                component={Register}
                 handleRegister={handleRegister}
                 onRedirectionButtonClick={handleButtonClick}
               />
@@ -279,6 +322,9 @@ function App() {
                 pageState={pageState}
                 isMovieSaved={isMovieSaved}
                 isPreloaderShown={isPreloaderShown}
+                handleCheckboxClick={handleCheckboxClick}
+                movieName={localStorage.getItem("movieName") || ""}
+                isCheckboxChecked={isCheckboxChecked}
               />
             }
           />
@@ -293,6 +339,8 @@ function App() {
                 pageState={pageState}
                 isMovieSaved={isMovieSaved}
                 isPreloaderShown={isPreloaderShown}
+                isCheckboxChecked={isSavedCheckboxChecked}
+                handleCheckboxClick={handleSavedCheckboxClick}
               />
             }
           />
@@ -301,8 +349,8 @@ function App() {
             element={
               <ProtectedRoute
                 component={Profile}
-                initialName={currentUser.name}
-                initialEmail={currentUser.email}
+                initialName={localStorage.getItem("name")}
+                initialEmail={localStorage.getItem("email")}
                 handleEditProfile={handleEditProfile}
                 handleLogout={handleLogout}
 

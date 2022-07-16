@@ -2,41 +2,52 @@ import React from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import CardList from "../CardList/CardList";
 import Preloader from "../../vendor/Preloader/Preloader";
+import {
+    BIG_INCREMENT,
+    CARDS_NUMBER_L,
+    CARDS_NUMBER_M,
+    CARDS_NUMBER_S,
+    HIGH_WIDTH,
+    LOW_WIDTH,
+    SMALL_INCREMENT
+} from "../../utils/constants";
 
-function Movies({ 
-    pageState, 
-    movies, 
-    handleSearch, 
-    handleButtonClick, 
-    isMovieSaved, 
-    isPreloaderShown 
+function Movies({
+    pageState,
+    movies,
+    handleSearch,
+    handleButtonClick,
+    isMovieSaved,
+    isPreloaderShown,
+    handleCheckboxClick,
+    movieName,
+    isCheckboxChecked
 }) {
 
     let initialLength;
-    if (window.innerWidth <= 480) {
-        initialLength = 5;
-    } else if (window.innerWidth < 1280) {
-        initialLength = 8;
+    if (window.innerWidth <= LOW_WIDTH) {
+        initialLength = CARDS_NUMBER_S;
+    } else if (window.innerWidth < HIGH_WIDTH) {
+        initialLength = CARDS_NUMBER_M;
     } else {
-        initialLength = 12;
+        initialLength = CARDS_NUMBER_L;
     }
 
     let initialIncrement;
-    if (window.innerWidth < 1280) {
-        initialIncrement = 2;
+    if (window.innerWidth < HIGH_WIDTH) {
+        initialIncrement = SMALL_INCREMENT;
     } else {
-        initialIncrement = 3;
+        initialIncrement = BIG_INCREMENT;
     }
 
     const [lastIndex, setLastIndex] = React.useState(initialLength);
     const [increment, setIncrement] = React.useState(initialIncrement);
 
     const handleResize = () => {
-        console.log(window.innerWidth);
-        if (window.innerWidth >= 1280) {
-            setIncrement(3);
+        if (window.innerWidth >= HIGH_WIDTH) {
+            setIncrement(BIG_INCREMENT);
         } else {
-            setIncrement(2);
+            setIncrement(SMALL_INCREMENT);
         }
     }
 
@@ -62,6 +73,11 @@ function Movies({
         <main className="movies">
             <SearchForm
                 handleSearch={handleSearch}
+                handleCheckboxClick={handleCheckboxClick}
+                movieName={movieName}
+                isCheckboxChecked={isCheckboxChecked}
+                movies={movies}
+                pageState={pageState}
             />
             <CardList
                 movies={movies.slice(0, lastIndex)}
@@ -82,7 +98,6 @@ function Movies({
             {isPreloaderShown && (
                 <Preloader />
             )}
-
         </main>
     )
 }

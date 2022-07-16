@@ -1,6 +1,7 @@
 import React from "react";
 import FormContainer from "../FormContainer/FormContainer";
 import validate from "../../utils/inputValidation";
+import { REG_EXP_EMAIL, REG_EXP_NAME, REG_EXP_PASSWORD } from "../../utils/constants";
 
 function Register({ handleRegister, onRedirectionButtonClick }) {
 
@@ -10,6 +11,8 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
     const [isNameValid, setIsNameValid] = React.useState(false);
     const [isEmailValid, setIsEmailValid] = React.useState(false);
     const [isPasswordValid, setIsPasswordValid] = React.useState(false);
+
+    const [isWaiting, setIsWaiting] = React.useState(false);
 
     const handleNameChange = (evt) => {
         setName(evt.target.value);
@@ -25,15 +28,16 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        handleRegister(name, email, password);
-        setName("");
-        setEmail("");
-        setPassword("");
+        setIsWaiting(true);
+        handleRegister(name, email, password)
+            .finally(() => {
+                setIsWaiting(false);
+            });
     }
 
-    const validateName = () => validate(name, /([а-яА-Яёa-z][\s\-]{0,1})+/i, setIsNameValid);
-    const validateEmail = () => validate(email, /[a-z\d\-\.\_]+\@[a-z]+\.[a-z]{2,}/i, setIsEmailValid);
-    const validatePassword = () => validate(password, /[^\sа-яё]+/i, setIsPasswordValid);
+    const validateName = () => validate(name, REG_EXP_NAME, setIsNameValid);
+    const validateEmail = () => validate(email, REG_EXP_EMAIL, setIsEmailValid);
+    const validatePassword = () => validate(password, REG_EXP_PASSWORD, setIsPasswordValid);
 
     React.useEffect(validateName, [name]);
     React.useEffect(validateEmail, [email]);
@@ -50,7 +54,7 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
                 otherOptionButtonText="Войти"
                 redirectionPath="/signin"
                 onRedirectionButtonClick={onRedirectionButtonClick}
-                isButtonDisabled={!isNameValid || !isEmailValid || !isPasswordValid}
+                isButtonDisabled={!isNameValid || !isEmailValid || !isPasswordValid || isWaiting}
             >
                 <p className="form__input-title">
                     Имя
@@ -67,6 +71,7 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
                     value={name || ''}
                     onChange={handleNameChange}
                     style={isNameValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
+                    disabled={isWaiting}
                 />
                 {!isNameValid && (
                     <span className="form__input-error">
@@ -88,6 +93,7 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
                     value={email || ''}
                     onChange={handleEmailChange}
                     style={isEmailValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
+                    disabled={isWaiting}
                 />
                 {!isEmailValid && (
                     <span className="form__input-error">
@@ -109,6 +115,7 @@ function Register({ handleRegister, onRedirectionButtonClick }) {
                     value={password || ''}
                     onChange={handlePasswordChange}
                     style={isPasswordValid ? { backgroundColor: "" } : { backgroundColor: "#f9d9d9" }}
+                    disabled={isWaiting}
                 />
                 {!isPasswordValid && (
                     <span className="form__input-error">
